@@ -4,16 +4,16 @@ using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
 using BepInEx.Configuration;
-using ModTemplate.Plugins;
+using OverrideDisplayJpTitle.Plugins;
 using UnityEngine;
 using System.Collections;
 
-namespace ModTemplate
+namespace OverrideDisplayJpTitle
 {
     [BepInPlugin(MyPluginInfo.PLUGIN_GUID, ModName, MyPluginInfo.PLUGIN_VERSION)]
     public class Plugin : BasePlugin
     {
-        public const string ModName = "ModTemplate";
+        public const string ModName = "OverrideDisplayJpTitle";
 
         public static Plugin Instance;
         private Harmony _harmony = null;
@@ -21,8 +21,7 @@ namespace ModTemplate
 
 
         public ConfigEntry<bool> ConfigEnabled;
-        //public ConfigEntry<string> ConfigSongTitleLanguageOverride;
-        //public ConfigEntry<float> ConfigFlipInterval;
+        public ConfigEntry<string> ConfigOverridesJsonPath;
 
 
 
@@ -45,15 +44,10 @@ namespace ModTemplate
                 true,
                 "Enables the mod.");
 
-            //ConfigSongTitleLanguageOverride = Config.Bind("General",
-            //    "SongTitleLanguageOverride",
-            //    "JP",
-            //    "Sets the song title to the selected language. (JP, EN, FR, IT, DE, ES, TW, CN, KO)");
-
-            //ConfigFlipInterval = Config.Bind("General",
-            //    "FlipInterval",
-            //    3f,
-            //    "How quickly the difficulty flips between oni and ura.");
+            ConfigOverridesJsonPath = Config.Bind("General",
+                "OverridesJsonPath",
+                Path.Combine(dataFolder, "Overrides.json"),
+                "The file path for the json containing what songs to override.");
         }
 
         private void SetupHarmony()
@@ -65,11 +59,10 @@ namespace ModTemplate
             {
                 bool result = true;
                 // If any PatchFile fails, result will become false
-                //result &= PatchFile(typeof(SwapJpEngTitlesPatch));
-                //result &= PatchFile(typeof(AdjustUraFlipTimePatch));
-                //SwapJpEngTitlesPatch.SetOverrideLanguages();
+                result &= PatchFile(typeof(OverridePatch));
                 if (result)
                 {
+                    OverridePatch.InitializeSongsToOverride();
                     Log.LogInfo($"Plugin {MyPluginInfo.PLUGIN_NAME} is loaded!");
                 }
                 else
