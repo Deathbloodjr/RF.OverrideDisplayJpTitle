@@ -1,7 +1,7 @@
 # RF.OverrideDisplayJpTitle
  A Rhythm Festival mod to change whether specific JP titles are displayed.
  
- <a href="https://shorturl.at/Vm30i"> <img src="Resources/InstallButton.png" alt="One-click Install using the Taiko Mod Manager" width="256"/> </a>
+ <a href="https://shorturl.at/zG9TE"> <img src="Resources/InstallButton.png" alt="One-click Install using the Taiko Mod Manager" width="256"/> </a>
  
 # Requirements
  Visual Studio 2022 or newer\
