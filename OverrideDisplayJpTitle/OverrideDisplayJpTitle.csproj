@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <ModName>OverrideDisplayJpTitle</ModName>
     <ModVersion>0.0.1</ModVersion>
-    <Description>A Rhythm Festival template for mod creation.</Description>
+    <Description>A Rhythm Festival mod to change whether specific JP titles are displayed.</Description>
   </PropertyGroup>
   
   <Target Name="UserFile" AfterTargets="PreBuildEvent">
