@@ -27,6 +27,7 @@ namespace OverrideDisplayJpTitle.Plugins
 
             try
             {
+                Overrides.Clear();
                 var node = JsonNode.Parse(File.ReadAllText(jsonPath));
                 var array = node.AsArray();
                 for (int i = 0; i < array.Count; i++)
