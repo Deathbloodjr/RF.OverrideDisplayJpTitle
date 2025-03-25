@@ -79,7 +79,7 @@ namespace OverrideDisplayJpTitle
                 if (result)
                 {
                     OverridePatch.InitializeSongsToOverride();
-                    TaikoSingletonMonoBehaviour<CommonObjects>.Instance.MyDataManager.MusicData.Reload();
+                    TaikoSingletonMonoBehaviour<CommonObjects>.Instance?.MyDataManager?.MusicData?.Reload();
                     Logger.Log($"Plugin {MyPluginInfo.PLUGIN_NAME} is loaded!");
                 }
                 else
@@ -145,7 +145,7 @@ namespace OverrideDisplayJpTitle
             plugin.AssignUnloadFunction(UnloadPlugin);
             //plugin.AssignReloadSaveFunction(ReloadPlugin);
             plugin.AssignConfigSetupFunction(SetupConfig);
-            plugin.AddToManager();
+            plugin.AddToManager(ConfigEnabled.Value);
         }
 
         private bool IsSaveManagerLoaded()
